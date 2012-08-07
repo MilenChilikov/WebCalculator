@@ -10,24 +10,34 @@
     </head>
     <body>
     
+    <table>
     <form >
-        <br>ShowSteps true/false: <input type="text" name="flag" />
-        <br>Enter expression    : <input type="text" name="expression" />
-        <br><input type="submit" />
-    
+        <br>
+        <tr>
+            <td>ShowSteps true/false: </td>
+            <td><input type="text" name="flag" /><td>
+        </tr>
+        <tr>
+            <td>Enter expression: </td>
+            <td><input type="text" name="expression" /></td>
+        </tr>
+    </table>
+        <br><input type="submit" /> <br>  
     </form>
-         
-        
-         
+       
         <% 
         Calculator calc = new Calculator();
         if((request.getParameter("expression") != null && request.getParameter("flag") != null) ) {
         %>
             <br>
-            ShowSteps: <%=request.getParameter("flag") %><br>
-            Expression: <%=request.getParameter("expression") %><br>
+            <%
+            if(request.getParameter("expression") != "")    {
+            %>
+                ShowSteps: <%=request.getParameter("flag") %><br>
+                Expression: <%=request.getParameter("expression") %><br>
             <br>
         <%
+            }
             out.println(calc.print(request.getParameter("flag"), request.getParameter("expression"), out));
         }
         %> 

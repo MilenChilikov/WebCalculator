@@ -173,7 +173,7 @@ public class App
         		}
         		else if(flag == 1 && openP && ch == '-')	{
         			if(signFlag)	{
-        				throw new IllegalArgumentException("Incorrect input. Expect number.<br>");
+        				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input. Expect number.<br>");
         			}
         			signFlag = true;
         		}

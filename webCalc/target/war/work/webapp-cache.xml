@@ -9,6 +9,7 @@
           <string>WEB-INF/classes/groupId/calc/Calculator.class</string>
           <string>WEB-INF/classes/groupId/calc/App.class</string>
           <string>WEB-INF/classes/groupId/calc/CalcServlet.class</string>
+          <string>WEB-INF/lib/javax.servlet-api-3.0.1.jar</string>
         </pathsSet>
       </path-set>
     </entry>
@@ -35,6 +36,18 @@
         <exclusions/>
         <optional>false</optional>
       </dependency>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>javax.servlet-api-3.0.1.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
   </dependenciesInfo>
 </webapp-structure>
