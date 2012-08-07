@@ -1,34 +1,19 @@
 package groupId.calc;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.math.BigDecimal;
-import java.util.InputMismatchException;
 
 import javax.servlet.jsp.JspWriter;
 
 public class Calculator {
 	
-	public String print(String fl, String expression, JspWriter out) throws IOException	{
+	public String print(String fl, String expression, Writer out) throws IOException	{
     	BigDecimal result = new BigDecimal(0);
     	boolean flag = true;
-   
-        
-       
-        
-        try	{
+    
+        flag = Boolean.parseBoolean(fl);
         	
-        	if(fl.equals("true"))
-        		flag = true;
-        	else if(fl.equals("false"))
-        		flag = false;
-        	else
-        		throw new InputMismatchException("Incorrect input. Enter true or false.<br>");
-        	
-        }	catch(InputMismatchException exp)	{
-        	out.println(exp.getMessage() + "<br>");
-        	return "";
-        }
-        
         App myApp = new App(flag);
           
         try	{
@@ -38,11 +23,11 @@ public class Calculator {
   
         
         }	catch	(IllegalArgumentException exc)	{
-        		out.println(exc.getMessage() + "<br>");
+        	out.write(exc.getMessage() + "<br>");
         		return "";
         		
         }	catch(ArithmeticException exc)	{
-        		out.println(exc.getMessage() + "<br>");
+        		out.write(exc.getMessage() + "<br>");
         		return "";
         }
 	}

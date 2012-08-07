@@ -1,6 +1,7 @@
 package groupId.calc;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -111,7 +112,7 @@ public class App
 		}
 	}
 	
-	private void input(String str, JspWriter out)	{
+	private void input(String str)	{
 		
 		char ch;
     	int flag = 1, countP = 0;
@@ -245,7 +246,7 @@ public class App
 	}
 	
 
-	private BigDecimal parse(JspWriter out) throws IOException{
+	private BigDecimal parse(Writer out) throws IOException{
 		
         it = operations.keySet().iterator();
         int privKey, currKey, nextKey, len = numbers.size();
@@ -258,13 +259,15 @@ public class App
         else	{
         	
         	if(numbers.get(currKey+1).doubleValue() == 0 && oper[currKey] == '/')	{
-        		out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(currKey+1)) + "<br>");
+        		out.write("Trying to compute " + roundBD(numbers.get(currKey)) + oper[currKey] + roundBD(numbers.get(currKey+1)) + "<br>");
         		throw new ArithmeticException("Can't divide by zero.<br>");
         	}
         	
         	if(isShowSteps())	{
-				out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(currKey+1)) + 
-					" = " + f(getResultOf(numbers.get(currKey), numbers.get(currKey+1), oper[currKey])) + "<br>");
+        		
+ 
+				out.write("Compute " + roundBD(numbers.get(currKey)) + " " + oper[currKey] + " " + roundBD(numbers.get(currKey+1)) + 
+					" = " + roundBD(getResultOf(numbers.get(currKey), numbers.get(currKey+1), oper[currKey])) + "<br>");
 			}
         	
         	result = getResultOf(numbers.get(currKey), numbers.get(currKey+1), oper[currKey]);
@@ -279,13 +282,13 @@ public class App
         		if(operations.get(privKey) <= operations.get(currKey) && operations.get(currKey) >= operations.get(nextKey))	{
         			
         			if(numbers.get(nextKey).doubleValue() == 0 && oper[currKey] == '/')	{
-        				out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(nextKey)) + "<br>");
+        				out.write("Trying to compute " + roundBD(numbers.get(currKey)) + oper[currKey] + roundBD(numbers.get(nextKey)) + "<br>");
         				throw new ArithmeticException("Can't divide by zero.<br>");
                 	}
         			
         			if(isShowSteps())	{
-        				out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(nextKey)) + 
-        					" = " + f(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])) + "<br>");
+        				out.write("Compute " + roundBD(numbers.get(currKey)) + " " + oper[currKey] + " " + roundBD(numbers.get(nextKey)) + 
+        					" = " + roundBD(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])) + "<br>");
         			}
         				
         			numbers.put(nextKey, getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey]));	
@@ -309,13 +312,13 @@ public class App
     			currKey = it.next();
     			
     			if(numbers.get(len).doubleValue() == 0 && oper[currKey] == '/')	{
-    				out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(len)) + "<br>");
+    				out.write("Trying to compute " + roundBD(numbers.get(currKey)) + oper[currKey] + roundBD(numbers.get(len)) + "<br>");
     				throw new ArithmeticException("Can't divide by zero.<br>");
             	}
     			
     			if(isShowSteps())	{
-    				out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(len)) + 
-    					" = " + f(getResultOf(numbers.get(currKey), numbers.get(len), oper[currKey])) + "<br>");
+    				out.write("Compute " + roundBD(numbers.get(currKey)) + " " + oper[currKey] + " " + roundBD(numbers.get(len)) + 
+    					" = " + roundBD(getResultOf(numbers.get(currKey), numbers.get(len), oper[currKey])) + "<br>");
     			}
     				
             	result = getResultOf(numbers.get(currKey), numbers.get(len), oper[currKey]);
@@ -326,14 +329,13 @@ public class App
         	else if(operations.get(currKey) >= operations.get(nextKey) && operations.get(currKey) >= operations.get(privKey))	{ 
         		
         		if(numbers.get(nextKey).doubleValue() == 0 && oper[currKey] == '/')	{
-        			out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(currKey)) + "<br>");
-        			out.newLine();
+        			out.write("Trying to compute " + roundBD(numbers.get(currKey)) + oper[currKey] + roundBD(numbers.get(currKey)) + "<br>");
         			throw new ArithmeticException("Can't divide by zero.<br>");
             	}
         		
         		if(isShowSteps())	{
-        			out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(nextKey)) + 
-       					" = " + f(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])) + "<br>");
+        			out.write("Compute " + roundBD(numbers.get(currKey)) + " " + oper[currKey] + " " + roundBD(numbers.get(nextKey)) + 
+       					" = " + roundBD(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])) + "<br>");
         		}
         			
        			numbers.put(nextKey, getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey]));
@@ -350,15 +352,14 @@ public class App
         	else if(operations.get(nextKey) >= operations.get(currKey))	{
         		
         		if(numbers.get(len).doubleValue() == 0 && oper[nextKey] == '/')	{
-        			out.println("Trying to compute " + f(numbers.get(nextKey)) + oper[nextKey] + f(numbers.get(len)) + "<br>");
-        			out.newLine();
+        			out.write("Trying to compute " + roundBD(numbers.get(nextKey)) + oper[nextKey] + roundBD(numbers.get(len)) + "<br>");
             		throw new ArithmeticException("Can't divide by zero.<br>");
             		
             	}
         		
         		if(isShowSteps())	{
-        			out.println("Compute " + f(numbers.get(nextKey)) + " " + oper[nextKey] + " " + f(numbers.get(len)) + 
-    					" = " + f(getResultOf(numbers.get(nextKey), numbers.get(len), oper[nextKey])) + "<br>");
+        			out.write("Compute " + roundBD(numbers.get(nextKey)) + " " + oper[nextKey] + " " + roundBD(numbers.get(len)) + 
+    					" = " + roundBD(getResultOf(numbers.get(nextKey), numbers.get(len), oper[nextKey])) + "<br>");
         		}
         			
         		numbers.put(len, getResultOf(numbers.get(nextKey), numbers.get(len), oper[nextKey]));
@@ -376,7 +377,7 @@ public class App
         return result;	
 	}
 	
-	private BigDecimal f(BigDecimal b)	{
+	private BigDecimal roundBD(BigDecimal b)	{
 		
 		String str = b.toString();
 		
@@ -399,9 +400,9 @@ public class App
 		return b;
 	}
 	
-	public BigDecimal function(String str, JspWriter out) throws IOException	{
-		input(str, out);
-		return f(parse(out));
+	public BigDecimal function(String str, Writer out) throws IOException	{
+		input(str);
+		return roundBD(parse(out));
 	}
 	
 	private void show()	{
