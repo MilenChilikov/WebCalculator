@@ -126,7 +126,7 @@ public class App
         			continue;
         		else if((Character.isDigit(str.charAt(i-1)) || isDot(str.charAt(i-1))) && 
         				(Character.isDigit(str.charAt(i+1)) || isDot(str.charAt(i+1))))
-        				throw new IllegalArgumentException("Position " + (i+1) + ": Whitespace between number." );
+        				throw new IllegalArgumentException("Position " + (i+1) + ": Whitespace between number. <br>" );
         	}
         	else
         		temp += str.charAt(i);
@@ -153,14 +153,14 @@ public class App
         			
         			if(countP < 0)	{
   
-        				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input of Close Parenthesis.");
+        				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input of Close Parenthesis.<br>");
         			}
         			
         		}
         		else if(flag == 1 && openP && signFlag && (isDot(ch) || Character.isDigit(ch))){
         			if(isDot(ch))	{
         				if(dotFlag)	{
-            				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input of Dot.");
+            				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input of Dot.<br>");
             			}
             			dotFlag = true;
             			temp += ch;
@@ -172,7 +172,7 @@ public class App
         		}
         		else if(flag == 1 && openP && ch == '-')	{
         			if(signFlag)	{
-        				throw new IllegalArgumentException("Incorrect input. Expect number.");
+        				throw new IllegalArgumentException("Incorrect input. Expect number.<br>");
         			}
         			signFlag = true;
         		}
@@ -191,7 +191,7 @@ public class App
         		
         		else if(flag == 1 && isDot(ch))	{
         			if(dotFlag)	{
-        				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input of Dot. ");
+        				throw new IllegalArgumentException("Position " + (i+1) + ": Incorrect input of Dot.<br>");
         			}
         			dotFlag = true;
         			temp += ch;
@@ -215,28 +215,28 @@ public class App
         		
         		else {
         			if(flag == 0)
-        				throw new IllegalArgumentException("Position " + (i+1) + ": Expect operation.");
+        				throw new IllegalArgumentException("Position " + (i+1) + ": Expect operation.<br>");
         			else if (flag == 1)
-        				throw new IllegalArgumentException("Position " + (i+1) + ": Expect number.");
+        				throw new IllegalArgumentException("Position " + (i+1) + ": Expect number.<br>");
         			else
-        				throw new IllegalArgumentException("Invalid input.");
+        				throw new IllegalArgumentException("Invalid input.<br>");
         		}
         	}
         	
         	else	{
         		
-        		throw new IllegalArgumentException(" Input correct expression. For example  3*4-2");
+        		throw new IllegalArgumentException(" Input correct expression. For example  3*4-2.<br>");
         	}
         }
         
         if(countP != 0)	{
         	
-        	throw new IllegalArgumentException("You haven't close all Parentheses.");
+        	throw new IllegalArgumentException("You haven't close all Parentheses.<br>");
         }
         
         if(flag == 1)	{
         	
-        	throw new IllegalArgumentException("You haven't input number after last operation.");
+        	throw new IllegalArgumentException("You haven't input number after last operation.<br>");
         }
         
 		
@@ -258,13 +258,13 @@ public class App
         else	{
         	
         	if(numbers.get(currKey+1).doubleValue() == 0 && oper[currKey] == '/')	{
-        		out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(currKey+1)));
-        		throw new ArithmeticException("Can't divide by zero.");
+        		out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(currKey+1)) + "<br>");
+        		throw new ArithmeticException("Can't divide by zero.<br>");
         	}
         	
         	if(isShowSteps())	{
 				out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(currKey+1)) + 
-					" = " + f(getResultOf(numbers.get(currKey), numbers.get(currKey+1), oper[currKey])));
+					" = " + f(getResultOf(numbers.get(currKey), numbers.get(currKey+1), oper[currKey])) + "<br>");
 			}
         	
         	result = getResultOf(numbers.get(currKey), numbers.get(currKey+1), oper[currKey]);
@@ -279,13 +279,13 @@ public class App
         		if(operations.get(privKey) <= operations.get(currKey) && operations.get(currKey) >= operations.get(nextKey))	{
         			
         			if(numbers.get(nextKey).doubleValue() == 0 && oper[currKey] == '/')	{
-        				out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(nextKey)));
-        				throw new ArithmeticException("Can't divide by zero.");
+        				out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(nextKey)) + "<br>");
+        				throw new ArithmeticException("Can't divide by zero.<br>");
                 	}
         			
         			if(isShowSteps())	{
         				out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(nextKey)) + 
-        					" = " + f(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])));
+        					" = " + f(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])) + "<br>");
         			}
         				
         			numbers.put(nextKey, getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey]));	
@@ -309,13 +309,13 @@ public class App
     			currKey = it.next();
     			
     			if(numbers.get(len).doubleValue() == 0 && oper[currKey] == '/')	{
-    				out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(len)));
-    				throw new ArithmeticException("Can't divide by zero.");
+    				out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(len)) + "<br>");
+    				throw new ArithmeticException("Can't divide by zero.<br>");
             	}
     			
     			if(isShowSteps())	{
     				out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(len)) + 
-    					" = " + f(getResultOf(numbers.get(currKey), numbers.get(len), oper[currKey])));
+    					" = " + f(getResultOf(numbers.get(currKey), numbers.get(len), oper[currKey])) + "<br>");
     			}
     				
             	result = getResultOf(numbers.get(currKey), numbers.get(len), oper[currKey]);
@@ -326,13 +326,14 @@ public class App
         	else if(operations.get(currKey) >= operations.get(nextKey) && operations.get(currKey) >= operations.get(privKey))	{ 
         		
         		if(numbers.get(nextKey).doubleValue() == 0 && oper[currKey] == '/')	{
-        			out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(currKey)));
-        			throw new ArithmeticException("Can't divide by zero.");
+        			out.println("Trying to compute " + f(numbers.get(currKey)) + oper[currKey] + f(numbers.get(currKey)) + "<br>");
+        			out.newLine();
+        			throw new ArithmeticException("Can't divide by zero.<br>");
             	}
         		
         		if(isShowSteps())	{
-        			System.out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(nextKey)) + 
-       					" = " + f(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])));
+        			out.println("Compute " + f(numbers.get(currKey)) + " " + oper[currKey] + " " + f(numbers.get(nextKey)) + 
+       					" = " + f(getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey])) + "<br>");
         		}
         			
        			numbers.put(nextKey, getResultOf(numbers.get(currKey), numbers.get(nextKey), oper[currKey]));
@@ -349,14 +350,15 @@ public class App
         	else if(operations.get(nextKey) >= operations.get(currKey))	{
         		
         		if(numbers.get(len).doubleValue() == 0 && oper[nextKey] == '/')	{
-        			out.println("Trying to compute " + f(numbers.get(nextKey)) + oper[nextKey] + f(numbers.get(len)));
-            		throw new ArithmeticException("Can't divide by zero.");
+        			out.println("Trying to compute " + f(numbers.get(nextKey)) + oper[nextKey] + f(numbers.get(len)) + "<br>");
+        			out.newLine();
+            		throw new ArithmeticException("Can't divide by zero.<br>");
             		
             	}
         		
         		if(isShowSteps())	{
         			out.println("Compute " + f(numbers.get(nextKey)) + " " + oper[nextKey] + " " + f(numbers.get(len)) + 
-    					" = " + f(getResultOf(numbers.get(nextKey), numbers.get(len), oper[nextKey])));
+    					" = " + f(getResultOf(numbers.get(nextKey), numbers.get(len), oper[nextKey])) + "<br>");
         		}
         			
         		numbers.put(len, getResultOf(numbers.get(nextKey), numbers.get(len), oper[nextKey]));

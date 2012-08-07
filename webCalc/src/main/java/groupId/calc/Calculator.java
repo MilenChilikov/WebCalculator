@@ -22,10 +22,10 @@ public class Calculator {
         	else if(fl.equals("false"))
         		flag = false;
         	else
-        		throw new InputMismatchException();
+        		throw new InputMismatchException("Incorrect input. Enter true or false.<br>");
         	
         }	catch(InputMismatchException exp)	{
-        	out.println("Incorrect input. Enter true or false.");
+        	out.println(exp.getMessage() + "<br>");
         	return "";
         }
         
@@ -34,17 +34,17 @@ public class Calculator {
         try	{
         	
         result = myApp.function(expression, out);
-        return "The result is " + result;
+        return "<br>The result is " + result + "<br>";
   
         
         }	catch	(IllegalArgumentException exc)	{
-        		out.println(exc.getMessage());
+        		out.println(exc.getMessage() + "<br>");
+        		return "";
         		
         }	catch(ArithmeticException exc)	{
-        		out.println(exc.getMessage());
+        		out.println(exc.getMessage() + "<br>");
+        		return "";
         }
-        
-        return "The result is " + result;
 	}
 	
 	public static void main(String[] args) {

@@ -12,25 +12,24 @@
     
     <form >
         <br>ShowSteps true/false: <input type="text" name="flag" />
-        <br>Enter expression: <input type="text" name="expression" />
+        <br>Enter expression    : <input type="text" name="expression" />
         <br><input type="submit" />
     
     </form>
          
+        
+         
         <% 
-        try {
         Calculator calc = new Calculator();
-        String s1 = request.getParameter("flag");
-        String s2 = request.getParameter("expression");
-        //PrintWriter output = response.getWriter();
-        out.println(calc.print(s1, s2, out));
-        }   catch(NullPointerException exp) {
-        
-            }
+        if((request.getParameter("expression") != null && request.getParameter("flag") != null) ) {
         %>
-        <%=request.getParameter("expression") %>
-        
-        
-        <br>Success!
+            <br>
+            ShowSteps: <%=request.getParameter("flag") %><br>
+            Expression: <%=request.getParameter("expression") %><br>
+            <br>
+        <%
+            out.println(calc.print(request.getParameter("flag"), request.getParameter("expression"), out));
+        }
+        %> 
     </body>
 </html>
