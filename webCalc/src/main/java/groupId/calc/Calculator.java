@@ -17,7 +17,7 @@ public class Calculator {
     		flag = false;
     	}
     	else
-    		throw new IllegalArgumentException("Possible values of ShowSteps are true and false.");
+    		throw new IllegalArgumentException("Possible value of ShowSteps is true/false.");
     	}	catch(IllegalArgumentException exc)	{
     		out.write(exc.getMessage() + "<br>");
     		return "";
